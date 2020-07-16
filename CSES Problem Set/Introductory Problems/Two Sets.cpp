@@ -51,6 +51,7 @@ int main(){
     if(sum%2==0){
         sum/=2;
         set<int> s1,s2;
+        //greedy algo
         for(int i=n;i>=1;--i){
             if(i<=sum){
                 s1.insert(i);
