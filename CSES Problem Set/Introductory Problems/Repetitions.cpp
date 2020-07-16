@@ -42,7 +42,7 @@ const ll INF=1e16;
 const int dx[4]= {-1,1,0,0}, dy[4]= {0,0,-1,1}; 
  
  
-int main(int argc, const char * argv[]) {
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
 
