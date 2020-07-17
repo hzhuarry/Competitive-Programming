@@ -67,13 +67,13 @@ template<class T> void read(T& x) {
 template<class H, class T> void read(pair<H, T>& p) {
     cin >> p.f >> p.s;
 }
-template<class T> void read(vector<T>& v) {
-    trav(i, v)
-        read(i);
-}
 template<class A, size_t S> void read(array<A, S>& x) {
     trav(a, x)
     read(a);
+}
+template<class T> void read(vector<T>& v) {
+    trav(i, v)
+        read(i);
 }
 template<class T> void read(T a[], int n) {
     FOR(n)
