@@ -61,27 +61,27 @@ template<class T> bool umax(T& a, const T& b) {
     return a < b ? a = b, 1 : 0; }
 
 //Read In
-template<class T> void read(T& x) {
+template<class T> void re(T& x) {
     cin >> x;
 }
-template<class H, class T> void read(pair<H, T>& p) {
+template<class H, class T> void re(pair<H, T>& p) {
     cin >> p.f >> p.s;
 }
-template<class A, size_t S> void read(array<A, S>& x) {
+template<class A, size_t S> void re(array<A, S>& x) {
     trav(a, x)
-    read(a);
+        re(a);
 }
-template<class T> void read(vector<T>& v) {
+template<class T> void re(vector<T>& v) {
     trav(i, v)
-        read(i);
+        re(i);
 }
-template<class T> void read(T a[], int n) {
+template<class T> void re(T a[], int n) {
     FOR(n)
-    read(a[i]);
+        re(a[i]);
 }
-template<class H, class... T> void read(H& h, T&... t) {
-    read(h);
-    read(t...);
+template<class H, class... T> void re(H& h, T&... t) {
+    re(h);
+    re(t...);
 }
 //Write Out
 template<class T> void write(T x) {
