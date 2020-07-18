@@ -89,7 +89,7 @@ template<class T> void write(T x) {
 }
 
 
-void fileIO(string filename) {
+void setIO(string filename) {
     freopen((filename+".in").c_str(), "r", stdin);
     freopen((filename+".out").c_str(), "w", stdout);
 }
