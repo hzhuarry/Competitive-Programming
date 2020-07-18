@@ -96,22 +96,25 @@ ll n,q;
 ll a[200001];
 ll seg[4 * 200001];
 
-void build(int ind=0, int l=0, int h=n-1){
-    if(l==h){
-        seg[ind] = a[l];
-        return;
+void build(int ind=0, int leftB=0, int rightB=n-1){
+    if(leftB==rightB){
+        seg[ind] = a[leftB];
     }
     else{
-        int mid = (l+h)/2;
-        build(2*ind+1,l,mid);
-        build(2*ind+2,mid+1,h);
+        int mid = (leftB+rightB)/2;
+        build(2*ind+1,leftB,mid);
+        build(2*ind+2,mid+1,rightB);
         seg[ind] = min(seg[2*ind+1], seg[2*ind+2]);
     }
 }
 
 ll query(int l, int r, int ind=0, int leftB=0, int rightB=n-1){
-    if(l > rightB || r < leftB) return INF;
-    if(l <= leftB && r >= rightB) return seg[ind];
+    if(l > rightB || r < leftB){
+        return INF;
+    }
+    if(l <= leftB && r >= rightB){
+        return seg[ind];
+    }
     int mid = (rightB+leftB)/2;
     return min(query(l,r,2*ind+1,leftB,mid), query(l,r,2*ind+2,mid+1,rightB));
 }
@@ -126,7 +129,6 @@ int main() {
     FOR(q){
         int a,b;
         re(a,b);
-        //0-based indexing
         cout << query(a-1,b-1) << endl;
     }
     return 0;
