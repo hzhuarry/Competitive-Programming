@@ -134,7 +134,7 @@ int main() {
     ll sum=0; int start=0;
     int ans=1e9;
     FOR(end,N){
-        sum+=hay[end][0];
+        sum+=(ll)hay[end][0];
         while(sum>=M){
             umin(ans,query(start,end));
             sum-=hay[start][0];
