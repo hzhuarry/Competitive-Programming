@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define pb push_back
+#define sz(x) (int)x.size()
+#define ins insert
+
+int N,M;
+vector<int> adj[26];
+char woke[3];
+bool vis[26];
+
+int main(){
+    while(scanf("%d %d",&N,&M)!=EOF){
+        memset(vis,0,sizeof(vis));
+        for(int i=0;i<26;++i){
+            adj[i].clear();
+        }
+
+        scanf("%s",woke);
+        for (int i=0; i<3; ++i)
+            vis[woke[i]-'A']=1;
+        for(int i=0;i<M;++i){
+            char t[2];
+            scanf("%s",t);
+            adj[t[0]-'A'].pb(t[1]-'A');
+            adj[t[1]-'A'].pb(t[0]-'A');
+        }
+        int hour=0;
+        set<int> possX;
+        do{
+            possX.clear();
+            for(int i=0;i<26;++i){
+                if(vis[i]) continue;
+                int cnt=0;
+                for(int u:adj[i]){
+                    if(vis[u]) cnt++;
+                }
+                if(cnt>=3){
+                    possX.ins(i);
+                }
+            }
+            for(auto it=possX.begin();it!=possX.end();++it){
+                vis[*it]=1;
+            }
+            if(sz(possX)>0)hour++;
+        }while(sz(possX)>0);
+        int cnt=count(vis,vis+26,true);
+        if(cnt==N){
+            printf("WAKE UP IN, %d, YEARS\n",hour);
+        }
+        else{
+            printf("THIS BRAIN NEVER WAKES UP\n");
+        }
+    }
+}
