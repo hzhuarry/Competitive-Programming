@@ -53,4 +53,5 @@ int main(){
             printf("THIS BRAIN NEVER WAKES UP\n");
         }
     }
+    return 0;
 }
