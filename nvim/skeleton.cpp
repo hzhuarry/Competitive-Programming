@@ -32,8 +32,8 @@ using namespace __gnu_pbds;
 #define FIFTH(a, b, c, d, e, ...) e
 #define FOR(...) FIFTH(__VA_ARGS__, FOR4, FOR3, FOR2, FOR1)(__VA_ARGS__)
 #define trav(a,x) for (auto& a: x)
-#define fitfor(i, x) for (auto i=(x).begin(); i!=(x).end(); ++i)
-#define ritfor(i, x) for (auto i=(x).rbegin(); i!=(x).rend(); ++i)
+#define FIT(i, x) for (auto i=(x).begin(); i!=(x).end(); ++i)
+#define RIT(i, x) for (auto i=(x).rbegin(); i!=(x).rend(); ++i)
 
 typedef long long ll;
 typedef long double ld;
