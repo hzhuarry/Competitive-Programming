@@ -100,7 +100,7 @@ const int dx[4]= {-1,1,0,0}, dy[4]= {0,0,-1,1};
 
 int N;
 const int maxn=5e5+1;
-int ans=2e9;
+int ans=2e9+5;
 pair<pair<int,int>,int> cows1[maxn],cows2[maxn];
 set<int> candCows;
 vector<int> allCand;
