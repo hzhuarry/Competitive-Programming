@@ -6,4 +6,4 @@ USACO : http://www.usaco.org/
 
 CSES Problem Set : https://cses.fi/problemset/
 
-Library Checker : https://judge.yosupo.jp/
+Library Checker(Standard DS Impl) : https://judge.yosupo.jp/
