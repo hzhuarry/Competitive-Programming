@@ -6,4 +6,4 @@ USACO : http://www.usaco.org/
 
 CSES Problem Set : https://cses.fi/problemset/
 
-Library Checker(Standard DS Impl) : https://judge.yosupo.jp/
+AtCoder Educational DP Contest : https://atcoder.jp/contests/dp/tasks
