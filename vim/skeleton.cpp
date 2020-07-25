@@ -85,7 +85,7 @@ template<class H, class... T> void read(H& h, T&... t) {
 }
 //Write Out
 template<class T> void write(T x) {
-    cout << x;
+    cout << x << endl;
 }
 
 
