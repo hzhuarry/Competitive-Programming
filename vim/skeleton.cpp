@@ -94,9 +94,9 @@ void setIO(string filename) {
     freopen((filename+".out").c_str(), "w", stdout);
 }
 
-const int MOD = 1000000007, MOD2 = 998244353;
+const int MOD = 1e9+7, MOD2 = 998244353;
 const ll INF=1e18;
-const int dx[4]= {-1,1,0,0}, dy[4]= {0,0,-1,1};
+const int dx[4] = {-1,1,0,0}, dy[4] = {0,0,-1,1};
 
 
 int main() {
