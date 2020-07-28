@@ -13,8 +13,6 @@ using namespace __gnu_pbds;
 #define all(x) begin(x), end(x)
 #define alla(x,n) x,x+n
 #define rall(x) (x).rbegin(), (x).rend()
-#define Sort(x) sort(all(x))
-#define Sorta(x,n) sort(alla(x,n))
 #define rsz resize
 #define ins insert
 #define lb lower_bound
@@ -60,7 +58,6 @@ template<class T> bool umin(T& a, const T& b) {
 template<class T> bool umax(T& a, const T& b) {
     return a < b ? a = b, 1 : 0; }
 
-//Read In
 template<class T> void read(T& x) {
     cin >> x;
 }
@@ -83,11 +80,9 @@ template<class H, class... T> void read(H& h, T&... t) {
     read(h);
     read(t...);
 }
-//Write Out
 template<class T> void write(T x) {
     cout << x << endl;
 }
-
 
 void setIO(string filename) {
     freopen((filename+".in").c_str(), "r", stdin);
@@ -95,14 +90,16 @@ void setIO(string filename) {
 }
 
 const int MOD = 1e9+7, MOD2 = 998244353;
+const int MX = 2e5+5; 
 const ll INF=1e18;
+const ld PI = acos((ld)-1);
 const int dx[4] = {-1,1,0,0}, dy[4] = {0,0,-1,1};
 
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
     cout<<fixed<<setprecision(12);
-    //setIO("");
+    setIO("");
     
     return 0;
 }
