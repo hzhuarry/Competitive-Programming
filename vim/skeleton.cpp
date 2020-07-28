@@ -84,9 +84,13 @@ template<class T> void write(T x) {
     cout << x << endl;
 }
 
-void setIO(string filename) {
-    freopen((filename+".in").c_str(), "r", stdin);
-    freopen((filename+".out").c_str(), "w", stdout);
+void setIO(string filename = "") {
+    ios_base::sync_with_stdio(0); cin.tie(0);
+    cin.exceptions(cin.failbit); 
+    if (sz(filename)) { /* USACO */
+        freopen((filename+".in").c_str(), "r", stdin);
+        freopen((filename+".out").c_str(), "w", stdout);
+    }
 }
 
 const int MOD = 1e9+7, MOD2 = 998244353;
@@ -97,9 +101,6 @@ const int dx[4] = {-1,1,0,0}, dy[4] = {0,0,-1,1};
 
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
-    cout<<fixed<<setprecision(12);
-    setIO("");
-    
+    setIO();
     return 0;
 }
