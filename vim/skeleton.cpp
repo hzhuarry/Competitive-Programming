@@ -58,6 +58,7 @@ template<class T> bool umin(T& a, const T& b) {
 template<class T> bool umax(T& a, const T& b) {
     return a < b ? a = b, 1 : 0; }
 
+/* INPUT */
 template<class T> void read(T& x) {
     cin >> x;
 }
@@ -80,13 +81,15 @@ template<class H, class... T> void read(H& h, T&... t) {
     read(h);
     read(t...);
 }
+
+/* OUTPUT */
 template<class T> void write(T x) {
     cout << x << endl;
 }
 
+/* FILE IO */
 void setIO(string filename = "") {
     ios_base::sync_with_stdio(0); cin.tie(0);
-    cin.exceptions(cin.failbit); 
     if (sz(filename)) { /* USACO */
         freopen((filename+".in").c_str(), "r", stdin);
         freopen((filename+".out").c_str(), "w", stdout);
