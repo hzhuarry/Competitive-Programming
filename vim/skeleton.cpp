@@ -83,9 +83,7 @@ template<class H, class... T> void read(H& h, T&... t) {
 }
 
 /* OUTPUT */
-template<class T> void write(T x) {
-    cout << x << endl;
-}
+
 
 /* FILE IO */
 void setIO(string filename = "") {
