@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-#define pb push_back
 using ll = long long;
 
 /* FILE IO */
