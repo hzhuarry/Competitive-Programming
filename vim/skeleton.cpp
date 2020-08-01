@@ -89,11 +89,11 @@ template<class H, class T> ostream& operator<<(ostream& o, const pair<H, T> &p) 
 }
 template<class A, size_t S> ostream& operator<<(ostream& o,const array<A, S> &a) {
     bool f=0;
-    FOR(S){
+    trav(i,a){
         if(f) 
             o << " ";
         f=1;
-        o << a[i];
+        o << i;
     }
     return o;
 }
@@ -129,7 +129,7 @@ template<class H, class T> ostream& operator<<(ostream& o, vector<pair<H, T>> &v
 }
 template<class A, size_t S> ostream& operator<<(ostream& o, vector<array<A, S>> &v) {
     bool f=0;
-    trav(i, S) {
+    trav(i, v) {
         if (f)
             o << '\n';
         f=1;
@@ -145,12 +145,12 @@ template<class H, class... T> void write(const H& h, const T&... t) {
     write(t...);
 }
 void print() {
-    cout << endl;
+    write("\n");
 }
 template<class H, class... T> void print(const H& h, const T&... t) {
-    cout << h;
+    write(h);
     if (sizeof...(t))
-        cout << " ";
+        write(' ');
     print(t...);
 }
 
@@ -192,8 +192,7 @@ void solve(){
 int main() {
     setIO();
     int t; read(t);
-    while(t--){
+    while(t--)
         solve();
-    }
     return 0;
 }
