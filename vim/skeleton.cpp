@@ -21,6 +21,7 @@ using namespace __gnu_pbds;
 #define uset unordered_set
 #define pqueue priority_queue
 #define ar array
+
 #define for_base(i, a, b, x) for (int i=((a)<(b))?(a):(a)-1; ((a)<(b))?i<(b):i>=(b); ((a)<(b))?i+=(x):i-=(x))
 #define FOR1(a) for_base(i, 0, a, 1)
 #define FOR2(i, a) for_base(i, 0, a, 1)
@@ -59,23 +60,121 @@ template<class T> bool umax(T& a, const T& b) {
 
 /* INPUT */
 template<class T> void read(T& x) {
-    cin >> x; }
+    cin >> x;
+}
 template<class H, class T> void read(pair<H, T>& p) {
-    cin >> p.f >> p.s; }
+    cin >> p.f >> p.s;
+}
 template<class A, size_t S> void read(array<A, S>& x) {
     trav(a, x)
-        read(a); }
+        read(a);
+}
 template<class T> void read(vector<T>& v) {
     trav(i, v)
-        read(i); }
+        read(i);
+}
 template<class T> void read(T a[], int n) {
     FOR(n)
-        read(a[i]); }
+        read(a[i]);
+}
 template<class H, class... T> void read(H& h, T&... t) {
     read(h);
-    read(t...); }
+    read(t...);
+}
 
-//redo
+/* TO_STRING */
+string to_string(char c) {
+    return string(1, c);
+}
+string to_string(const char* s) {
+    return string(s);
+}
+string to_string(string s) {
+    return s;
+}
+string to_string(bool b) {
+    #ifdef local
+        return b?"true":"false";
+    #else
+        return to_string((int)b);
+    #endif
+}
+string to_string(vector<bool> v) {
+    string res;
+    FOR(sz(v))
+        res+=char('0'+v[i]);
+    return res;
+}
+template<size_t S> string to_string(bitset<S> b) {
+    string res;
+    FOR(S)
+        res+=char('0'+b[i]);
+    return res;
+}
+template<class A, class B> string to_string(pair<A,B> p) {
+    #ifdef local
+        return "("+to_string(p.f)+", "+to_string(p.s)+")";
+    #else
+        return to_string(p.f)+" "+to_string(p.s);
+    #endif
+}
+template<class T> string to_string(T v) {
+    #ifdef local
+        bool fst = 1;
+        string res = "{";
+        trav(x,v){
+            if(!fst)
+                res+=", ";
+            fst=0;
+            res+=to_string(x);
+        }
+        res+="} ";
+        return res;
+    #else
+        bool fst = 1;
+        string res = "";
+        trav(x,v) {
+            if (!fst)
+                res += " ";
+            fst = 0;
+            res += to_string(x);
+        }
+        return res;
+    #endif
+}
+
+/* OUTPUT */
+template<class A> void write(A x) {
+    cout << to_string(x);
+}
+template<class H, class... T> void write(const H& h, const T&... t) {
+    write(h);
+    write(t...);
+}
+void print() {
+    write("\n");
+}
+template<class H, class... T> void print(const H& h, const T&... t) {
+    write(h);
+    if(sizeof...(t))
+        write(' ');
+    print(t...);
+}
+/* DEBUG */
+void DBG() {
+    cerr << "]" << endl;
+}
+template<class H, class... T> void DBG(H h, T... t) {
+    cerr << to_string(h);
+    if(sizeof...(t))
+        cerr << ", ";
+    DBG(t...);
+}
+#ifdef local
+#define dbg(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
+#else
+#define dbg(...) 0
+#endif
 
 /* FILE IO */
 void setIO(string filename = "") {
@@ -87,13 +186,20 @@ void setIO(string filename = "") {
 }
 
 const int MOD = 1e9+7, MOD2 = 998244353;
-const int MX = 2e5+5; 
+const int MX = 2e5+5;
 const ll INF=1e18;
 const ld PI = acos((ld)-1);
 const int dx[4] = {-1,1,0,0}, dy[4] = {0,0,-1,1};
 
+void solve(){
+    ;
+}
 
 int main() {
     setIO();
+    int t; read(t);
+    while(t--){
+        solve();
+    }
     return 0;
 }
