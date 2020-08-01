@@ -82,10 +82,10 @@ str ts(const char* s) { return (str)s; }
 str ts(str s) { return s; }
 str ts(bool b) { return b ? "true" : "false"; }
 str ts(vector<bool> v) {
-	str res = "{"; F0R(i,sz(v)) res += char('0'+v[i]);
+	str res = "{"; FOR(i,sz(v)) res += char('0'+v[i]);
 	res += "}"; return res; }
 template<size_t SZ> str ts(bitset<SZ> b) {
-	str res = ""; F0R(i,SZ) res += char('0'+b[i]);
+	str res = ""; FOR(i,SZ) res += char('0'+b[i]);
 	return res; }
 template<class A, class B> str ts(pair<A,B> p);
 template<class T> str ts(T v) { // containers with begin(), end()
