@@ -24,6 +24,8 @@ int main(){
             prime_factors.pb(i);
         }
     }
+    if(n>1)
+        prime_factors.pb(n);
     
     /* print out answer */
     int sz = (int)prime_factors.size();
