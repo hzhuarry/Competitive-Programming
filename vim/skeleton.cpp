@@ -143,7 +143,7 @@ void DBG() {
     cerr << "]" << endl;
 }
 template<class H, class... T> void DBG(H h, T... t) {
-    cerr << to_string(h);
+    cerr << h;
     if(sizeof...(t))
         cerr << ", ";
     DBG(t...);
