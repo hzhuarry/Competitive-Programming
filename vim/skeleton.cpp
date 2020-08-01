@@ -21,7 +21,6 @@ using namespace __gnu_pbds;
 #define uset unordered_set
 #define pqueue priority_queue
 #define ar array
-
 #define for_base(i, a, b, x) for (int i=((a)<(b))?(a):(a)-1; ((a)<(b))?i<(b):i>=(b); ((a)<(b))?i+=(x):i-=(x))
 #define FOR1(a) for_base(i, 0, a, 1)
 #define FOR2(i, a) for_base(i, 0, a, 1)
@@ -83,7 +82,16 @@ template<class H, class... T> void read(H& h, T&... t) {
 }
 
 /* OUTPUT */
+#define ts to_string
+str ts(char c) { return str(1,c); }
+str ts(const char* s) { return (str)s; }
+str ts(str s) { return s; }
 
+/* DEBUG */
+void DBG() { cerr << "]" << endl; }
+template<class H, class... T> void DBG(H h, T... t) {
+	cerr << ts(h); if (sizeof...(t)) cerr << ", ";
+	DBG(t...); }
 
 /* FILE IO */
 void setIO(string filename = "") {
