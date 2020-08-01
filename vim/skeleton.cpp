@@ -75,63 +75,7 @@ template<class H, class... T> void read(H& h, T&... t) {
     read(h);
     read(t...); }
 
-/* TO_STRING */
-#define ts to_string
-str ts(char c) { return str(1,c); }
-str ts(const char* s) { return (str)s; }
-str ts(str s) { return s; }
-str ts(bool b) { return b ? "true" : "false"; }
-str ts(vector<bool> v) {
-	str res = "{"; FOR(i,sz(v)) res += char('0'+v[i]);
-	res += "}"; return res; }
-template<size_t SZ> str ts(bitset<SZ> b) {
-	str res = ""; FOR(i,SZ) res += char('0'+b[i]);
-	return res; }
-template<class A, class B> str ts(pair<A,B> p);
-template<class T> str ts(T v) {
-	#ifdef local
-		bool fst = 1; str res = "{";
-		for (const auto& x: v) {
-			if (!fst) res += ", ";
-			fst = 0; res += ts(x);
-		}
-		res += "}"; return res;
-	#else
-		bool fst = 1; str res = "";
-		for (const auto& x: v) {
-			if (!fst) res += " ";
-			fst = 0; res += ts(x);
-		}
-		return res;
-	#endif
-}
-template<class A, class B> str ts(pair<A,B> p) {
-	#ifdef local
-		return "("+ts(p.f)+", "+ts(p.s)+")"; 
-	#else
-		return ts(p.f)+" "+ts(p.s);
-	#endif
-}
-
-/* OUTPUT */
-template<class A> void pr(A x) { cout << ts(x); }
-template<class H, class... T> void pr(const H& h, const T&... t) { 
-	pr(h); pr(t...); }
-void ps() { pr("\n"); } /* space inbetween lines */
-template<class H, class... T> void ps(const H& h, const T&... t) { 
-	pr(h); if (sizeof...(t)) pr(" "); ps(t...); }
-
-/* DEBUG */
-void DBG() { cerr << "]" << endl; }
-template<class H, class... T> void DBG(H h, T... t) {
-	cerr << ts(h); if (sizeof...(t)) cerr << ", ";
-	DBG(t...); }
-
-#ifdef local 
-	#define dbg(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
-#else
-	#define dbg(...) 0
-#endif
+//redo
 
 /* FILE IO */
 void setIO(string filename = "") {
