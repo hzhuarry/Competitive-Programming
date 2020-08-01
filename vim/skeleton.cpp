@@ -88,7 +88,7 @@ template<size_t SZ> str ts(bitset<SZ> b) {
 	str res = ""; FOR(i,SZ) res += char('0'+b[i]);
 	return res; }
 template<class A, class B> str ts(pair<A,B> p);
-template<class T> str ts(T v) { // containers with begin(), end()
+template<class T> str ts(T v) {
 	#ifdef local
 		bool fst = 1; str res = "{";
 		for (const auto& x: v) {
@@ -117,7 +117,7 @@ template<class A, class B> str ts(pair<A,B> p) {
 template<class A> void pr(A x) { cout << ts(x); }
 template<class H, class... T> void pr(const H& h, const T&... t) { 
 	pr(h); pr(t...); }
-void ps() { pr("\n"); } // print w/ spaces
+void ps() { pr("\n"); } /* space inbetween lines */
 template<class H, class... T> void ps(const H& h, const T&... t) { 
 	pr(h); if (sizeof...(t)) pr(" "); ps(t...); }
 
