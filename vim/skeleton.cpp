@@ -81,23 +81,37 @@ str ts(char c) { return str(1,c); }
 str ts(const char* s) { return (str)s; }
 str ts(str s) { return s; }
 str ts(bool b) { return b ? "true" : "false"; }
-str ts(vector<bool> v) { 
-	str res = "{"; for(ll i = 0;i < (ll)v.size(); i++) res += char('0'+v[i]);
+str ts(vector<bool> v) {
+	str res = "{"; F0R(i,sz(v)) res += char('0'+v[i]);
 	res += "}"; return res; }
 template<size_t SZ> str ts(bitset<SZ> b) {
-	str res = ""; for(ll i = 0; i < b.size(); i++) res += char('0'+b[i]);
+	str res = ""; F0R(i,SZ) res += char('0'+b[i]);
 	return res; }
 template<class A, class B> str ts(pair<A,B> p);
-template<class T> str ts(T v) { 
-	bool fst = 1; str res = "{";
-	for (const auto& x: v) {
-		if (!fst) res += ", ";
-		fst = 0; res += ts(x);
-	}
-	res += "}"; return res;
+template<class T> str ts(T v) { // containers with begin(), end()
+	#ifdef local
+		bool fst = 1; str res = "{";
+		for (const auto& x: v) {
+			if (!fst) res += ", ";
+			fst = 0; res += ts(x);
+		}
+		res += "}"; return res;
+	#else
+		bool fst = 1; str res = "";
+		for (const auto& x: v) {
+			if (!fst) res += " ";
+			fst = 0; res += ts(x);
+		}
+		return res;
+	#endif
 }
 template<class A, class B> str ts(pair<A,B> p) {
-	return "("+ts(p.f)+", "+ts(p.s)+")"; }
+	#ifdef local
+		return "("+ts(p.f)+", "+ts(p.s)+")"; 
+	#else
+		return ts(p.f)+" "+ts(p.s);
+	#endif
+}
 
 /* OUTPUT */
 template<class A> void pr(A x) { cout << ts(x); }
@@ -112,6 +126,7 @@ void DBG() { cerr << "]" << endl; }
 template<class H, class... T> void DBG(H h, T... t) {
 	cerr << ts(h); if (sizeof...(t)) cerr << ", ";
 	DBG(t...); }
+
 #ifdef local 
 	#define dbg(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
 #else
