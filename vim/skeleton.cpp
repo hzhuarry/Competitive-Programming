@@ -137,6 +137,22 @@ template<class A, size_t S> ostream& operator<<(ostream& o, vector<array<A, S>> 
     }
     return o;
 }
+template<class T> void write(T x) {
+    cout << x;
+}
+template<class H, class... T> void write(const H& h, const T&... t) {
+    write(h);
+    write(t...);
+}
+void print() {
+    cout << endl;
+}
+template<class H, class... T> void print(const H& h, const T&... t) {
+    cout << h;
+    if (sizeof...(t))
+        cout << " ";
+    print(t...);
+}
 
 /* DEBUG */
 void DBG() {
