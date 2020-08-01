@@ -82,84 +82,62 @@ template<class H, class... T> void read(H& h, T&... t) {
     read(t...);
 }
 
-/* TO_STRING */
-string to_string(char c) {
-    return string(1, c);
+/* OUTPUT */
+template<class H, class T> ostream& operator<<(ostream& o, const pair<H, T> &p) {
+    o << p.fi << " " << p.se;
+    return o;
 }
-string to_string(const char* s) {
-    return string(s);
+template<class A, size_t S> ostream& operator<<(ostream& o,const array<A, S> &a) {
+    bool f=0
+    FOR(S){
+        if(f) 
+            o << " ";
+        f=1;
+        o << a[i];
+    }
+    return o;
 }
-string to_string(string s) {
-    return s;
+template<class T> ostream& operator<<(ostream& o, vector<T> &v) {
+    bool f=0;
+    trav(i, v) {
+        if (f)
+            o << " ";
+        f=1;
+        o << i;
+    }
+    return o;
 }
-string to_string(bool b) {
-    #ifdef local
-        return b?"true":"false";
-    #else
-        return to_string((int)b);
-    #endif
+template<class T> ostream& operator<<(ostream& o, vector<vector<T>> &v) {
+    bool f=0;
+    trav(i, v) {
+        if (f)
+            o << '\n';
+        f=1;
+        o << i;
+    }
+    return o;
 }
-string to_string(vector<bool> v) {
-    string res;
-    FOR(sz(v))
-        res+=char('0'+v[i]);
-    return res;
+template<class H, class T> ostream& operator<<(ostream& o, vector<pair<H, T>> &v) {
+    bool f=0;
+    trav(i, v) {
+        if (f)
+            o << '\n';
+        f=1;
+        o << i;
+    }
+    return o;
 }
-template<size_t S> string to_string(bitset<S> b) {
-    string res;
-    FOR(S)
-        res+=char('0'+b[i]);
-    return res;
-}
-template<class A, class B> string to_string(pair<A,B> p) {
-    #ifdef local
-        return "("+to_string(p.f)+", "+to_string(p.s)+")";
-    #else
-        return to_string(p.f)+" "+to_string(p.s);
-    #endif
-}
-template<class T> string to_string(T v) {
-    #ifdef local
-        bool fst = 1;
-        string res = "{";
-        trav(x,v){
-            if(!fst)
-                res+=", ";
-            fst=0;
-            res+=to_string(x);
-        }
-        res+="} ";
-        return res;
-    #else
-        bool fst = 1;
-        string res = "";
-        trav(x,v) {
-            if (!fst)
-                res += " ";
-            fst = 0;
-            res += to_string(x);
-        }
-        return res;
-    #endif
+template<class A, size_t S> ostream& operator<<(ostream& o, vector<array<A, S>> &v) {
+    bool f=0;
+    trav(i, S) {
+        if (f)
+            o << '\n';
+        f=1;
+        o << i;
+    }
+    return o;
 }
 
-/* OUTPUT */
-template<class A> void write(A x) {
-    cout << to_string(x);
-}
-template<class H, class... T> void write(const H& h, const T&... t) {
-    write(h);
-    write(t...);
-}
-void print() {
-    write("\n");
-}
-template<class H, class... T> void print(const H& h, const T&... t) {
-    write(h);
-    if(sizeof...(t))
-        write(' ');
-    print(t...);
-}
 /* DEBUG */
 void DBG() {
     cerr << "]" << endl;
