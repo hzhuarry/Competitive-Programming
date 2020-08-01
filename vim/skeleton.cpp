@@ -59,39 +59,64 @@ template<class T> bool umax(T& a, const T& b) {
 
 /* INPUT */
 template<class T> void read(T& x) {
-    cin >> x;
-}
+    cin >> x; }
 template<class H, class T> void read(pair<H, T>& p) {
-    cin >> p.f >> p.s;
-}
+    cin >> p.f >> p.s; }
 template<class A, size_t S> void read(array<A, S>& x) {
     trav(a, x)
-        read(a);
-}
+        read(a); }
 template<class T> void read(vector<T>& v) {
     trav(i, v)
-        read(i);
-}
+        read(i); }
 template<class T> void read(T a[], int n) {
     FOR(n)
-        read(a[i]);
-}
+        read(a[i]); }
 template<class H, class... T> void read(H& h, T&... t) {
     read(h);
-    read(t...);
-}
+    read(t...); }
 
-/* OUTPUT */
+/* TO_STRING */
 #define ts to_string
 str ts(char c) { return str(1,c); }
 str ts(const char* s) { return (str)s; }
 str ts(str s) { return s; }
+str ts(bool b) { return b ? "true" : "false"; }
+str ts(vector<bool> v) { 
+	str res = "{"; for(ll i = 0;i < (ll)v.size(); i++) res += char('0'+v[i]);
+	res += "}"; return res; }
+template<size_t SZ> str ts(bitset<SZ> b) {
+	str res = ""; for(ll i = 0; i < b.size(); i++) res += char('0'+b[i]);
+	return res; }
+template<class A, class B> str ts(pair<A,B> p);
+template<class T> str ts(T v) { 
+	bool fst = 1; str res = "{";
+	for (const auto& x: v) {
+		if (!fst) res += ", ";
+		fst = 0; res += ts(x);
+	}
+	res += "}"; return res;
+}
+template<class A, class B> str ts(pair<A,B> p) {
+	return "("+ts(p.f)+", "+ts(p.s)+")"; }
+
+/* OUTPUT */
+template<class A> void pr(A x) { cout << ts(x); }
+template<class H, class... T> void pr(const H& h, const T&... t) { 
+	pr(h); pr(t...); }
+void ps() { pr("\n"); } // print w/ spaces
+template<class H, class... T> void ps(const H& h, const T&... t) { 
+	pr(h); if (sizeof...(t)) pr(" "); ps(t...); }
 
 /* DEBUG */
 void DBG() { cerr << "]" << endl; }
 template<class H, class... T> void DBG(H h, T... t) {
 	cerr << ts(h); if (sizeof...(t)) cerr << ", ";
 	DBG(t...); }
+#ifdef local 
+	#define dbg(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
+#else
+	#define dbg(...) 0
+#endif
 
 /* FILE IO */
 void setIO(string filename = "") {
