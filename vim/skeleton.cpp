@@ -21,6 +21,7 @@ using namespace __gnu_pbds;
 #define uset unordered_set
 #define pqueue priority_queue
 #define ar array
+#define vt vector
 
 #define for_base(i, a, b, x) for (int i=((a)<(b))?(a):(a)-1; ((a)<(b))?i<(b):i>=(b); ((a)<(b))?i+=(x):i-=(x))
 #define FOR1(a) for_base(i, 0, a, 1)
@@ -35,21 +36,12 @@ using namespace __gnu_pbds;
 
 typedef long long ll;
 typedef long double ld;
-typedef double db;
 typedef string str;
 typedef pair<int,int> pii;
 typedef pair<ll,ll> pll;
-typedef pair<db,db> pdd;
+typedef pair<double,double> pdd;
 typedef pair<ld,ld> pld;
-typedef vector<int> vi;
-typedef vector<ll> vl;
-typedef vector<db> vd;
-typedef vector<str> vs;
-typedef vector<ld> vld;
-typedef vector<pii> vpii;
-typedef vector<pll> vpll;
-typedef vector<pld> vpld;
-typedef vector<pdd> vpdd;
+
 template<class T> using min_heap=pqueue<T, vector<T>, greater<T>>;
 template<class T> using oset=tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
@@ -90,7 +82,7 @@ template<class H, class T> ostream& operator<<(ostream& o, const pair<H, T> &p) 
 template<class A, size_t S> ostream& operator<<(ostream& o,const array<A, S> &a) {
     bool f=0;
     trav(i,a){
-        if(f) 
+        if(f)
             o << " ";
         f=1;
         o << i;
