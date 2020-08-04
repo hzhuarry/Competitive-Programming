@@ -1,38 +1,30 @@
 #include <bits/stdc++.h>
-
+#define pb push_back
 using namespace std;
 
-#define pb push_back
+const int mxN=2e5+1;
+int n, ans=-1, v_ans;
+vector<int> adj[mxN];
 
-const int maxn=2e5 + 1;
-
-int N;
-vector<int> adj[maxn];
-int dist[maxn];
-
-void dfs(int node=1,int parent=0){
-    if(parent>0)
-        dist[node] = dist[parent]+1;
-    for(int neighbor : adj[node]){
-        if(parent!=neighbor){
-            dfs(neighbor,node);
-        }
-    }
+void dfs(int v, int p=-1, int d=0) {
+    if (d>ans)
+        ans=d, v_ans=v;
+    for (int u : adj[v])
+        if (u!=p)
+            dfs(u, v, d+1);
 }
 
-int main(){
+int main() {
     cin.tie(0)->sync_with_stdio(0);
-    cin >> N;
-    for(int i=1;i<N;++i){
-        int a,b;
+    cin >> n;
+    for (int i=1; i<n; ++i) {
+        int a, b;
         cin >> a >> b;
         adj[a].pb(b);
         adj[b].pb(a);
     }
-    dfs();
-    int far_node1 = max_element(dist+1,dist+N+1) - dist;
-    memset(dist,0,sizeof(dist));
-    dfs(far_node1);
-    cout << *max_element(dist+1,dist+1+N) << endl;
-    return 0;
+    dfs(1);
+    ans=-1;
+    dfs(v_ans);
+    cout << ans << '\n';
 }
