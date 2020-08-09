@@ -24,6 +24,8 @@ int main(){
         ll pos = a[i][0] + ((ll)T * a[i][1]);
         newpos.push_back(pos);
     }
+    
+    /* LDS nlogn algo */
     vt<ll> dp(N+1,-MX);
     dp[0]=MX;
     for(int i=0;i<N;++i){
