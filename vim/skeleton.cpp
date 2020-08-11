@@ -76,7 +76,7 @@ template<class H, class... T> void read(H& h, T&... t) {
 
 /* OUTPUT */
 template<class H, class T> ostream& operator<<(ostream& o, const pair<H, T> &p) {
-    o << p.fi << " " << p.se;
+    o << p.f << " " << p.s;
     return o;
 }
 template<class A, size_t S> ostream& operator<<(ostream& o,const array<A, S> &a) {
