@@ -43,7 +43,7 @@ int main(){
         }
         ans = min(ans, max({lower_left, lower_right, upper_left, upper_right}));
 
-        /* sweep a vertical line */ 
+        /* advance the vertical line to after each point */ 
         for(int j=1; j<N-1; ++j){
             if(points[j][1] > y){
                 --upper_right;
