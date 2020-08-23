@@ -4,6 +4,7 @@ using namespace std;
 #define ll long long
 #define ar array
 
+/* sort by y-val */
 bool cmp(const ar<ll,2>& a, const ar<ll,2>& b){
     if(a[1] == b[1])
         return a[0] < b[0];
