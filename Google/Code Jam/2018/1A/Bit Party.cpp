@@ -5,7 +5,7 @@ using namespace std;
 
 const ll INF = 1e18+1e9;
 
-bool ok(vector<array<ll,3>>&v, ll r, ll b, ll c, ll T) {
+bool ok(vector<array<ll,3>>& v, ll r, ll b, ll c, ll T) {
     vector<ll> poss;
     for(int i=0; i<c; ++i) {
         poss.push_back(max(min(v[i][0], (T-v[i][2])/v[i][1]), 0LL));
