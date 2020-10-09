@@ -45,16 +45,8 @@ int main() {
             merge(a, b);
         }
     }
-
-    bool is_connected = 0;
-    for(int i=1; i<=n; ++i) {
-        if(sz[i] == n) {
-            is_connected = 1;
-            break;
-        }
-    }
     
-    if(is_connected) {
+    if(sz[find(1)] == n) {
         cout << res << endl;
     }
     else {
@@ -62,5 +54,3 @@ int main() {
     }
     return 0;
 }
-
-
