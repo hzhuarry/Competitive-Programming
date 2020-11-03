@@ -2,6 +2,7 @@
 using namespace std;
 
 int n, x[100];
+/* with the first i coins, can I make a cost of x */
 bool dp[101][100001];
 
 int main() {
