@@ -19,7 +19,7 @@ struct wall {
         i(i), j(j), combined_room_size(combined_room_size), direction(direction)
     {
     }
-    bool operator <(const wall& other) {
+    bool operator <(const wall& other) const {
         if(combined_room_size == other.combined_room_size) {
             if(j == other.j) {
                 if(i == other.i) {
