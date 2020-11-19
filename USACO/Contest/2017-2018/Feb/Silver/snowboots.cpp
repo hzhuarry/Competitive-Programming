@@ -5,6 +5,7 @@ using namespace std;
 
 int N, B, f[250];
 ar<int, 2> d[250];
+/* can we reach cell i ending on boot j */
 bool dp[251][251];
 
 int main() {
