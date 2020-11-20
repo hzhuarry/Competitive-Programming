@@ -1,26 +1,25 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-using ll = long long;
 
-const ll MOD=1e9+7;
-const int maxn=1e6;
+#define ll long long
 
-ll n;
-ll dp[maxn+1];
-ll dice[6] = {1,2,3,4,5,6};
+const ll mod = 1e9 + 7;
+ll n, dp[1000001];
 
-int main(){
-    cin.tie(0)->sync_with_stdio(0);
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
     cin >> n;
-    dp[0]=1;
-    for(int i=1;i<=n;++i){
-        for(int c:dice){
-            if(i-c >=0){
-                dp[i]=(dp[i] + dp[i-c])%MOD;
-            }
+    dp[0] = 1;
+    for(ll i=0; i<n; ++i) {
+        for(int j=1; j<=6; ++j) {
+            if(i+j<=n)
+                dp[i+j] = (dp[i+j] + dp[i]) % mod;
         }
     }
-    cout << dp[n] << endl;
+    cout << dp[n];
     return 0;
 }
+
+
