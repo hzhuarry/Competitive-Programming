@@ -1,43 +1,24 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-using ll = long long;
 
-/* FILE IO */
-void setIO(string filename = "") {
-    ios_base::sync_with_stdio(0); cin.tie(0);
-    if ((int)filename.size()) { /* USACO */
-        freopen((filename+".in").c_str(), "r", stdin);
-        freopen((filename+".out").c_str(), "w", stdout);
-    }
-}
+int n, dp[1000001];
 
-const ll INF=1e18;
-int n;
-ll dp[1000001];
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
 
-vector<ll> get_dig(ll x){
-    vector<ll> res;
-    while(x){
-        res.pb(x%10);
-        x/=10;
-    }
-    return res;
-}
-
-int main(){
-    setIO();
     cin >> n;
-    fill(dp,dp+n+1,INF);
-    dp[n]=0;
-    for(int i=n;i>=0;--i){
-        vector<ll> digits = get_dig(i);
-        for(ll x:digits){
-            if(i-x>=0){
-                dp[i-x]=min(dp[i]+1,dp[i-x]);
-            }
+
+    memset(dp, 0x3f, sizeof(dp));
+    dp[n] = 0;
+    for(int i=n; i>0; --i) {
+        string ss = to_string(i);
+        for(char c : ss) {
+            dp[i-(c-'0')] = min(dp[i-(c-'0')], dp[i]+1);
         }
     }
-    cout << dp[0] << endl;
+    cout << dp[0];
     return 0;
 }
+
+
