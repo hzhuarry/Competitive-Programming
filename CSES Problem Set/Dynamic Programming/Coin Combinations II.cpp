@@ -1,39 +1,29 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-using ll = long long;
 
-/* FILE IO */
-void setIO(string filename = "") {
-    ios_base::sync_with_stdio(0); cin.tie(0);
-    if ((int)filename.size()) { /* USACO */
-        freopen((filename+".in").c_str(), "r", stdin);
-        freopen((filename+".out").c_str(), "w", stdout);
-    }
-}
+#define ll long long
 
-const int maxn=1e6;
-const ll MOD=1e9+7;
-int n;
-ll x;
-ll coins[100];
-ll dp[maxn+1];
+const ll mod = 1e9 + 7;
+ll n, x, c[100], dp[1000001];
 
-int main(){
-    setIO();
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
     cin >> n >> x;
-    for(int i=0;i<n;++i){
-        cin >> coins[i];
-    }
-    dp[0]=1;
-    for(int i=0;i<n;++i){
-        for(int j=1;j<=x;++j){
-            if(j-coins[i]>=0){
-                dp[j]+=dp[j-coins[i]];
-                dp[j]%=MOD;
+    for(int i=0; i<n; ++i)
+        cin >> c[i];
+
+    dp[0] = 1;
+    for(ll j=0; j<n; ++j) {
+        for(ll i=0; i<x; ++i) {
+            if(i+c[j]<=x) {
+                dp[i+c[j]] = (dp[i+c[j]] + dp[i]) % mod;
             }
         }
     }
-    cout << dp[x] << endl;
+    cout << dp[x];
     return 0;
 }
+
+
