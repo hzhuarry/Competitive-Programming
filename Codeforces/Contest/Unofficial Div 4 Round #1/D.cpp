@@ -94,7 +94,7 @@ void solve() {
     }
     FIT(it, mp) {
         dbg(it->f, it->s);
-        if(it->s==(n-1))
+        if(it->s>=(n-1))
             finish("YES");
     }
     print("NO");
