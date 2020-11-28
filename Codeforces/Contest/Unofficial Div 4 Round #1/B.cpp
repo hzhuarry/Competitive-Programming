@@ -87,6 +87,7 @@ void solve() {
         else
             even.pb(a[i]);
     }
+    
     if(even.empty())
         finish(-1);
 
