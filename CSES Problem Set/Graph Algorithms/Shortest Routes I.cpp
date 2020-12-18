@@ -2,51 +2,47 @@
 using namespace std;
 
 #define ll long long
-#define pb push_back
 
-const int MX = 1e5;
-const ll inf = 1e18;
-int n,m;
-vector<pair<int,ll> > adj[MX];
-ll dist[MX];
-bool vis[MX];
+const ll MXN = 1e5 + 5;
+ll n, m, dist[MXN];
+bool vis[MXN];
+vector<array<ll, 2>> adj[MXN];
+priority_queue<array<ll, 2>, vector<array<ll, 2>>, greater<array<ll, 2>>> pq;
 
-int main(){
+int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
     cin >> n >> m;
-    for(int i=0;i<m;++i){
-        int a,b;
-        ll w;
-        cin >> a >> b >> w;
-        --a,--b;
-        adj[a].pb({b,w});
+    for(int i=0; i<m; ++i) {
+        ll a, b, c;
+        cin >> a >> b >> c;
+        --a;
+        --b;
+        adj[a].push_back({b, c});
     }
-    fill(dist,dist+n,inf);
-    dist[0]=0;
 
-    priority_queue<pair<ll,int>, vector<pair<ll,int> > , greater<pair<ll,int> > > pq;
-    pq.push({0,0});
-    while(!pq.empty()){
-        int v = pq.top().second;
+    memset(dist, 0x3f, sizeof(dist));
+    dist[0] = 0;
+    pq.push({0, 0});
+
+    while(!pq.empty()) {
+        ll v = pq.top()[1];
         pq.pop();
         if(vis[v])
             continue;
-        vis[v] = true;
-        for(int i=0;i<(int)adj[v].size();++i){
-            if(vis[adj[v][i].first])
-                continue;
-            int u = adj[v][i].first;
-            ll d = adj[v][i].second;
-            if(dist[v] + d < dist[u]){
-                dist[u] = dist[v] + d;
-                pq.push({dist[u],u});
+        vis[v] = 1;
+        for(auto u : adj[v]) {
+            if(dist[v] + u[1] < dist[u[0]]) {
+                dist[u[0]] = dist[v] + u[1];
+                pq.push({dist[u[0]], u[0]});
             }
         }
     }
-    for(int i=0;i<n;++i){
+
+    for(int i=0; i<n; ++i)
         cout << dist[i] << " ";
-    }
     return 0;
 }
+
+
