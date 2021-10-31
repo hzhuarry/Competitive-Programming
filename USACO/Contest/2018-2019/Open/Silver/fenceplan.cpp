@@ -1,8 +1,3 @@
-/*
-ID: hzhu378
-LANG: C++
-TASK: 
-*/
 #include <bits/stdc++.h>
 using namespace std;
 
