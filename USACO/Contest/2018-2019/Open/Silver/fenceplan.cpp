@@ -1,97 +1,63 @@
+/*
+ID: hzhu378
+LANG: C++
+TASK: 
+*/
 #include <bits/stdc++.h>
-
 using namespace std;
 
-#define endl "\n"
-#define pf push_front
-#define pb(s) push_back(s)
-#define mp(a,b) make_pair(a,b)
-#define f first
-#define s second
-#define ALL(v) v.begin(), v.end()
-#define ALLA(arr, sz) arr, arr + sz
-#define SORT(v) sort(ALL(v))
-#define REVERSE(v) reverse(ALL(v))
-#define SORTA(arr, sz) sort(ALLA(arr, sz))
-#define REVERSEA(arr, sz) reverse(ALLA(arr, sz))
-#define PI 3.14159265358979323846264338327950L
-#define MOD 1000000007
-#define lb lower_bound
-#define ub upper_bound
+#define ll long long
+#define ar array
 
+int N, M, ans = 1e9;
+ar<int, 2> cows[(int)1e5];
+vector<int> adj[(int)1e5];
+bool vis[(int)1e5];
+int minX, minY, maxX, maxY;
 
-typedef long long ll;
-typedef long double ld;
-typedef string str;
-
-typedef pair<int,int> pi;
-typedef pair<ll,ll> pll;
-typedef pair<ld,ld> pld;
-
-typedef vector<int> vi;
-typedef vector<ll> vll;
-typedef vector<char> vc;
-typedef vector<str> vs;
-typedef vector<ld> vd;
-
-typedef vector<pi> vpi;
-typedef vector<pll> vpl;
-typedef vector<pld> vpd;
-
-const int dx[4]= {-1,1,0,0}, dy[4]= {0,0,-1,1}; //flood
-
-struct box{
-    int x1,x2;
-    int y1,y2;
-};
-
-int N,M;
-vpi C;
-vi nbrs[100000];
-bool vis[100000];
-
-void ff(int i, int cmp, box &b)
-{
-    vis[i]=cmp;
-    b.x1=min(b.x1,C[i].f);
-    b.x2=max(b.x2,C[i].f);
-    b.y1=min(b.y1,C[i].s);
-    b.y2=max(b.y2,C[i].s);
-    for(auto u:nbrs[i]){
-        if(vis[u]==0){
-            ff(u,cmp,b);
+void dfs(int u) {
+    vis[u] = true;
+    int x = cows[u][0];
+    int y = cows[u][1];
+    minX = min(minX, x);
+    minY = min(minY, y);
+    maxX = max(maxX, x);
+    maxY = max(maxY, y);
+    for(int nu : adj[u]) {
+        if(!vis[nu]) {
+            dfs(nu);
         }
     }
 }
 
 int main() {
-    
-    ios_base::sync_with_stdio(false);
+    ios_base::sync_with_stdio(0);
     cin.tie(0);
-    ifstream cin ("fenceplan.in");
-    ofstream cout ("fenceplan.out");
+    ifstream cin("fenceplan.in");
+    ofstream cout("fenceplan.out");
+
+    cin >> N >> M;
+    for(int i = 0; i < N; ++i) {
+        cin >> cows[i][0] >> cows[i][1];
+    }
+    for(int i = 0; i < M; ++i) {
+        int x, y;
+        cin >> x >> y;
+        --x;
+        --y;
+        adj[x].push_back(y);
+        adj[y].push_back(x);
+    }
     
-    cin>>N>>M;
-    for(int i=0;i<N;++i){
-        int x,y;
-        cin>>x>>y;
-        C.pb(mp(x,y));
+    for(int i = 0; i < N; ++i) {
+        if(vis[i])
+            continue;
+        minX = minY = 1e9;
+        maxX = maxY = 0;
+        dfs(i);
+        int perimeter = (2 * (maxY - minY)) + (2 * (maxX - minX));
+        ans = min(ans, perimeter);
     }
-    for(int i=0;i<M;++i){
-        int a,b;
-        cin>>a>>b;
-        nbrs[a-1].pb(b-1);
-        nbrs[b-1].pb(a-1);
-    }
-    
-    int cmp=1,ans=1e9;
-    for(int i=0;i<N;++i){
-        if(vis[i]==0){
-            box b={99999999,0,99999999,0};
-            ff(i,cmp,b);
-            ans=min(ans,2*(b.x2-b.x1+b.y2-b.y1));
-        }
-    }
-    cout<<ans<<endl;
-    return 0;
+
+    cout << ans << '\n';
 }
