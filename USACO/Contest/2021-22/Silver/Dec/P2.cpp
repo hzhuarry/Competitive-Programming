@@ -1,65 +1,62 @@
-#include <bits/stdc++.h>
-/* #include <ext/pb_ds/assoc_container.hpp> */
-/* #include <ext/pb_ds/tree_policy.hpp> */
-using namespace std;
-/* using namespace __gnu_pbds; */
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <stack>
+#include <string>
+#include <utility>
+#include <vector>
+#include <queue>
 
-#define endl '\n'
-#define pb push_back
-#define fi first
-#define se second
-#define sz(x) (int)x.size()
-#define all(x) begin(x), end(x)
+using namespace std;
+
+// TEMPLATE {{{
+
+/* Macros */
+#define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
-#define ins insert
-#define pqueue priority_queue
 #define ar array
 #define vt vector
-#define rsz resize
-
-#define for_base(i, a, b, x) for (int i=((a)<(b))?(a):(a)-1; ((a)<(b))?i<(b):i>=(b); ((a)<(b))?i+=(x):i-=(x))
-#define FOR1(a) for_base(i, 0, a, 1)
-#define FOR2(i, a) for_base(i, 0, a, 1)
-#define FOR3(i, a, b) for_base(i, a, b, 1)
-#define FOR4(i, a, b, x) for_base(i, a, b, x)
-#define FIFTH(a, b, c, d, e, ...) e
-#define FOR(...) FIFTH(__VA_ARGS__, FOR4, FOR3, FOR2, FOR1)(__VA_ARGS__)
-#define trav(a, x) for (auto& a: x)
-#define FIT(i, x) for (auto i=(x).begin(); i!=(x).end(); ++i)
-#define RIT(i, x) for (auto i=(x).rbegin(); i!=(x).rend(); ++i)
+#define sz(x) (int)(x).size()
 #define finish(...) return void(print(__VA_ARGS__))
 
-typedef long long ll;
-typedef long double ld;
-typedef string str;
+/* Input */
+template<class T> void read(T &x) { cin >> x; }
+template<class H, class T> void read(pair<H, T> &p) { cin >> p.first >> p.second; }
+template<class T, size_t S> void read(array<T, S> &a) { for (T &i : a) read(i); }
+template<class T> void read(vector<T> &v) { for (T &i : v) read(i); }
 
-template<class T> using min_queue = pqueue<T, vector<T>, greater<T>>;
-/* find_by_order(x) => returns an iterator to the element at a given position */
-/* order_of_key(x) => returns the position of a given element */
-/* template<class T> using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; */
+template<class H, class... T> void read(H &h, T &...t) { read(h); read(t...); }
 
-template<class T> bool umin(T& a, const T& b) { return b < a ? a = b, 1 : 0; }
-template<class T> bool umax(T& a, const T& b) { return a < b ? a = b, 1 : 0; }
+/* Output */
+template<class H, class T> ostream &operator<<(ostream &o, pair<H, T> &p) { o << p.first << " " << p.second; return o; }
+template<class T, size_t S> ostream &operator<<(ostream &o, array<T, S> &a) { string s; for (T i : a) o << s << i, s = " "; return o; }
+template<class T> ostream &operator<<(ostream &o, vector<T> &v) { string s; for (T i : v) o << s << i, s = " "; return o; }
 
-template<class T> void read(T& x) { cin >> x; }
-template<class H, class T> void read(pair<H, T>& p) { cin >> p.f >> p.s; }
-template<class A, size_t S> void read(array<A, S>& x) { trav(a, x) read(a); }
-template<class T> void read(vector<T>& v) { trav(i, v) read(i); }
-template<class H, class... T> void read(H& h, T&... t) { read(h); read(t...); }
+template<class H, class T> ostream &operator<<(ostream &o, vector<pair<H, T> > &v) { string s; for (auto& i : v) o << s << i, s = "\n"; return o; }
+template<class T, size_t S> ostream &operator<<(ostream &o, vector<array<T, S> > &v) { string s; for (auto& i : v) o << s << i, s = "\n"; return o; }
+template<class T> ostream &operator<<(ostream &o, vector<vector<T> > &v) { string s; for (auto& i : v) o << s << i, s = "\n"; return o; }
 
-template<class H, class T> ostream &operator<<(ostream &o, pair<H, T> &p) { o << p.fi << " " << p.se; return o; }
-template<class H, class T> ostream &operator<<(ostream &o, vector<pair<H, T>> &v) { string s; trav(i, v) o << s << i, s = "\n"; return o; }
-template<class T, size_t S> ostream &operator<<(ostream &o, array<T, S> &a) { string s; trav(i, a) o << s << i, s = " "; return o; }
-template<class T, size_t S> ostream &operator<<(ostream &o, vector<array<T, S>> &v) { string s; trav(i, v) o << s << i, s = "\n"; return o; }
-template<class T> ostream &operator<<(ostream &o, vector<T> &v) { string s; trav(i, v) o << s << i, s = " "; return o; }
-template<class T> ostream &operator<<(ostream &o, vector<vector<T>> &v) { string s; trav(i, v) o << s << i, s = "\n"; return o; }
 template<class T> void write(T x) { cout << x; }
 template<class H, class... T> void write(const H &h, const T &...t) { write(h); write(t...); }
+
 void print() { write('\n'); }
 template<class H, class... T> void print(const H &h, const T &...t) { write(h); if (sizeof...(t)) write(' '); print(t...); }
-template<class H, class... T> void interact(const H &h, const T &...t) { write(h); if (sizeof...(t)) write(' '); print(t...); cout.flush(); }
 
-void DBG() { cerr << "]" << endl; }
+/* Debug */
+void DBG() { cerr << "]" << '\n'; }
 template<class H, class... T> void DBG(H h, T... t) { cerr << h; if(sizeof...(t)) cerr << ", "; DBG(t...); }
 #ifdef local
 #define dbg(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
@@ -67,109 +64,114 @@ template<class H, class... T> void DBG(H h, T... t) { cerr << h; if(sizeof...(t)
 #define dbg(...) 0
 #endif
 
-/* const ll mod = 1e9 + 7; */
-/* const int dx[4] = {-1, 1, 0, 0}, dy[4] = {0, 0, -1, 1}; */
+template<typename X, typename Y> bool ckmin(X& x, const Y& y) { return (y < x) ? (x = y, 1) : 0; }
+template<typename X, typename Y> bool ckmax(X& x, const Y& y) { return (x < y) ? (x = y, 1) : 0; }
 
-int par[(int)1e5];
+using ll = long long;
+using ld = long double;
 
-void init(int n) {
-    FOR(n)
-        par[i] = i;
-}
+// }}}
 
-int find(int x) {
-    if(x == par[x]) {
-        return x;
-    }
-    return par[x] = find(par[x]);
-}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void merge(int a, int b) {
-    a = find(a);
-    b = find(b);
-    if(a != b) {
-        par[a] = b;
-    }
-}
-
-void solve() {
+void run_case() {
     int n, m;
     read(n, m);
-
-    init(n);
-
-    FOR(m) {
-        int u, v;
-        read(u, v);
-        --u;
-        --v;
-        merge(u, v);
+    vt<vt<ll> > adj(n + 1);
+    for(int i = 0; i < m; ++i) {
+        ll x, y;
+        read(x, y);
+        adj[x].push_back(y);
+        adj[y].push_back(x);
     }
 
-    vt<int> reps(n);
-    set<int> components;
+    vt<vt<ll> > groups;
+    vt<bool> vis(n + 1, false);
+    int one_comp = -1, n_comp = n + 1;
+    int color = 0;
 
-    FOR(n) {
-        reps[i] = find(i);
-        components.ins(reps[i]);
-    }
-    ll ans = 1e18;
-
-    vt<vt<int>> locs(n);
-    FOR(n) {
-        locs[reps[i]].pb(i);
-    }
-
-    auto calc = [&](int x, vt<int> &v) -> ll {
-        ll res = 1e18;
-        auto it = lower_bound(all(v), x);
-        if(it != v.end()) {
-            ll d = abs(*it - x);
-            umin(res, d * d);
+    auto dfs = [&](auto &&self, int node, vt<ll>& comp) -> void {
+        if(node == 1) {
+            one_comp = color;
         }
-        if(it != v.begin()) {
-            --it;
-            ll d = abs(*it - x);
-            umin(res, d * d);
+        if(node == n) {
+            n_comp = color;
         }
-        return res;
+        vis[node] = true;
+        comp.push_back(node);
+        for(ll next : adj[node]) {
+            if(!vis[next]) {
+                self(self, next, comp);
+            }
+        }
     };
 
-    //first bridge
-    for(int x : locs[reps[0]]) {
-        dbg(x, calc(x, locs[reps[n - 1]]));
-        umin(ans, calc(x, locs[reps[n - 1]]));
-    }
-    dbg(ans);
-
-    //second bridges
-    for(int C: components) {
-        if(C != reps[0] and C != reps[n - 1]) {
-            ll m1 = 1e18;
-            ll m2 = 1e18;
-            for(int x : locs[C]) {
-                umin(m1, calc(x, locs[reps[0]]));
-                umin(m2, calc(x, locs[reps[n - 1]]));
-            }
-            umin(ans, m1 + m2);
+    for(int i = 1; i <= n; ++i) {
+        if(!vis[i]) {
+            vt<ll> nodes;
+            dfs(dfs, i, nodes);
+            color += 1;
+            groups.push_back(nodes);
         }
     }
-    print(ans);
+
+    if(one_comp == n_comp) {
+        print(0);
+    }
+    else {
+        for(auto &i : groups) {
+            sort(all(i));
+        }
+
+        // first case is to use only one bridge
+        ll ans = 1e18;
+        for(ll &i : groups[one_comp]) {
+            auto it = lower_bound(all(groups[n_comp]), i);
+            if(it != groups[n_comp].end())
+                ckmin(ans, (i - *it) * (i - *it));
+            if(it != groups[n_comp].begin())
+                --it;
+            ckmin(ans, (i - *it) * (i - *it));
+        }
+
+        // second case is to use both bridges
+        // the n_comp will try to connect with every other comp besides the first and we find the min
+        // then we make the connection from the first comp
+        ll ans2 = 1e18;
+        for(int i = 0; i < sz(groups); ++i) {
+            if(i == one_comp or i == n_comp) {
+                continue;
+            } 
+            ll mn1 = 1e18, mn2 = 1e18;
+            for(ll &u : groups[i]) {
+                auto i1 = lower_bound(all(groups[one_comp]), u);
+                if(i1 != groups[one_comp].end())
+                    ckmin(mn1, (u - *i1) * (u - *i1));
+                if(i1 != groups[one_comp].begin())
+                    --i1;
+                ckmin(mn1, (u - *i1) * (u - *i1));
+
+                auto i2 = lower_bound(all(groups[n_comp]), u);
+                if(i2 != groups[n_comp].end())
+                    ckmin(mn2, (u - *i2) * (u - *i2));
+                if(i2 != groups[n_comp].begin())
+                    --i2;
+                ckmin(mn2, (u - *i2) * (u - *i2));
+                ckmin(ans2, mn1 + mn2);
+            }
+        }
+        print(min(ans, ans2));
+    }
 }
-/* REMEMBER
- *      int overflow, array bounds
- *      special cases (n=1? n=0?)
- */
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    int T = 1;
-    read(T);
-    for(int tc = 1; tc <= T; ++tc) {
-        /* write("Case #", tc, ": "); */
-        solve();
+    int t = 1;
+    read(t);
+    for(int tc = 1; tc <= t; ++tc) {
+        // write("Case #", tc, ": ");
+        run_case();
     }
 }
-
