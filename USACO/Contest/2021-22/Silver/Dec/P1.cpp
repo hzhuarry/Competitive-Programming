@@ -1,65 +1,59 @@
-#include <bits/stdc++.h>
-/* #include <ext/pb_ds/assoc_container.hpp> */
-/* #include <ext/pb_ds/tree_policy.hpp> */
-using namespace std;
-/* using namespace __gnu_pbds; */
+#include <algorithm>
+#include <array>
+#include <bitset>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <cstring>
+#include <functional>
+#include <iomanip>
+#include <iostream>
+#include <map>
+#include <numeric>
+#include <queue>
+#include <random>
+#include <set>
+#include <string>
+#include <utility>
+#include <vector>
 
-#define endl '\n'
-#define pb push_back
-#define fi first
-#define se second
-#define sz(x) (int)x.size()
-#define all(x) begin(x), end(x)
+using namespace std;
+
+// TEMPLATE {{{
+
+/* Macros */
+#define all(x) (x).begin(), (x).end()
 #define rall(x) (x).rbegin(), (x).rend()
-#define ins insert
-#define pqueue priority_queue
 #define ar array
 #define vt vector
-#define rsz resize
-
-#define for_base(i, a, b, x) for (int i=((a)<(b))?(a):(a)-1; ((a)<(b))?i<(b):i>=(b); ((a)<(b))?i+=(x):i-=(x))
-#define FOR1(a) for_base(i, 0, a, 1)
-#define FOR2(i, a) for_base(i, 0, a, 1)
-#define FOR3(i, a, b) for_base(i, a, b, 1)
-#define FOR4(i, a, b, x) for_base(i, a, b, x)
-#define FIFTH(a, b, c, d, e, ...) e
-#define FOR(...) FIFTH(__VA_ARGS__, FOR4, FOR3, FOR2, FOR1)(__VA_ARGS__)
-#define trav(a, x) for (auto& a: x)
-#define FIT(i, x) for (auto i=(x).begin(); i!=(x).end(); ++i)
-#define RIT(i, x) for (auto i=(x).rbegin(); i!=(x).rend(); ++i)
+#define sz(x) (int)(x).size()
 #define finish(...) return void(print(__VA_ARGS__))
 
-typedef long long ll;
-typedef long double ld;
-typedef string str;
+/* Input */
+template<class T> void read(T &x) { cin >> x; }
+template<class H, class T> void read(pair<H, T> &p) { cin >> p.first >> p.second; }
+template<class T, size_t S> void read(array<T, S> &a) { for (T &i : a) read(i); }
+template<class T> void read(vector<T> &v) { for (T &i : v) read(i); }
 
-template<class T> using min_queue = pqueue<T, vector<T>, greater<T>>;
-/* find_by_order(x) => returns an iterator to the element at a given position */
-/* order_of_key(x) => returns the position of a given element */
-/* template<class T> using oset = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>; */
+template<class H, class... T> void read(H &h, T &...t) { read(h); read(t...); }
 
-template<class T> bool umin(T& a, const T& b) { return b < a ? a = b, 1 : 0; }
-template<class T> bool umax(T& a, const T& b) { return a < b ? a = b, 1 : 0; }
+/* Output */
+template<class H, class T> ostream &operator<<(ostream &o, pair<H, T> &p) { o << p.first << " " << p.second; return o; }
+template<class T, size_t S> ostream &operator<<(ostream &o, array<T, S> &a) { string s; for (T i : a) o << s << i, s = " "; return o; }
+template<class T> ostream &operator<<(ostream &o, vector<T> &v) { string s; for (T i : v) o << s << i, s = " "; return o; }
 
-template<class T> void read(T& x) { cin >> x; }
-template<class H, class T> void read(pair<H, T>& p) { cin >> p.f >> p.s; }
-template<class A, size_t S> void read(array<A, S>& x) { trav(a, x) read(a); }
-template<class T> void read(vector<T>& v) { trav(i, v) read(i); }
-template<class H, class... T> void read(H& h, T&... t) { read(h); read(t...); }
+template<class H, class T> ostream &operator<<(ostream &o, vector<pair<H, T> > &v) { string s; for (auto& i : v) o << s << i, s = "\n"; return o; }
+template<class T, size_t S> ostream &operator<<(ostream &o, vector<array<T, S> > &v) { string s; for (auto& i : v) o << s << i, s = "\n"; return o; }
+template<class T> ostream &operator<<(ostream &o, vector<vector<T> > &v) { string s; for (auto& i : v) o << s << i, s = "\n"; return o; }
 
-template<class H, class T> ostream &operator<<(ostream &o, pair<H, T> &p) { o << p.fi << " " << p.se; return o; }
-template<class H, class T> ostream &operator<<(ostream &o, vector<pair<H, T>> &v) { string s; trav(i, v) o << s << i, s = "\n"; return o; }
-template<class T, size_t S> ostream &operator<<(ostream &o, array<T, S> &a) { string s; trav(i, a) o << s << i, s = " "; return o; }
-template<class T, size_t S> ostream &operator<<(ostream &o, vector<array<T, S>> &v) { string s; trav(i, v) o << s << i, s = "\n"; return o; }
-template<class T> ostream &operator<<(ostream &o, vector<T> &v) { string s; trav(i, v) o << s << i, s = " "; return o; }
-template<class T> ostream &operator<<(ostream &o, vector<vector<T>> &v) { string s; trav(i, v) o << s << i, s = "\n"; return o; }
 template<class T> void write(T x) { cout << x; }
 template<class H, class... T> void write(const H &h, const T &...t) { write(h); write(t...); }
+
 void print() { write('\n'); }
 template<class H, class... T> void print(const H &h, const T &...t) { write(h); if (sizeof...(t)) write(' '); print(t...); }
-template<class H, class... T> void interact(const H &h, const T &...t) { write(h); if (sizeof...(t)) write(' '); print(t...); cout.flush(); }
 
-void DBG() { cerr << "]" << endl; }
+/* Debug */
+void DBG() { cerr << "]" << '\n'; }
 template<class H, class... T> void DBG(H h, T... t) { cerr << h; if(sizeof...(t)) cerr << ", "; DBG(t...); }
 #ifdef local
 #define dbg(...) cerr << "LINE(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
@@ -67,76 +61,80 @@ template<class H, class... T> void DBG(H h, T... t) { cerr << h; if(sizeof...(t)
 #define dbg(...) 0
 #endif
 
-/* const ll mod = 1e9 + 7; */
-/* const int dx[4] = {-1, 1, 0, 0}, dy[4] = {0, 0, -1, 1}; */
+template<typename X, typename Y> bool ckmin(X& x, const Y& y) { return (y < x) ? (x = y, 1) : 0; }
+template<typename X, typename Y> bool ckmax(X& x, const Y& y) { return (x < y) ? (x = y, 1) : 0; }
 
-void solve() {
-    ll k, m, n;
-    read(k, m, n);
-    vt<ar<ll, 2>> grass(k);
+using ll = long long;
+
+// }}}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void run_case() {
+    int K, M, N;
+    read(K, M, N);
+    vt<pair<ll, ll> > grass(K);
     read(grass);
-    vt<ll> f(m);
-    read(f);
+    vt<ll> bad_pos(M);
+    read(bad_pos);
 
     sort(all(grass));
-    sort(all(f));
-    //0 = left, 1 = right
-    ll v[m][2];
-    memset(v, 0 , sizeof(v));
-    for(int i = 0; i < k; ++i) {
-        ll pos = grass[i][0];
-        ll val = grass[i][1];
-        auto it = lower_bound(all(f), pos);
-        if(it == f.end()) {
-            // from right
-            v[m - 1][1] += val;
-        }
-        else if(it == f.begin()) {
-            //from left
-            v[0][0] += val;
-        }
-        else {
-            //find closer
-            auto i1 = it - 1;
-            ll p1 = *i1;
-            ll p2 = *it;
-            ll id1 = i1 - f.begin();
-            ll id2 = it - f.begin();
+    sort(all(bad_pos));
 
-            if(abs(p1 - pos) < abs(p2 - pos)) {
-                v[id1][1] += val;
+    vt<vt<ll> > contribution(M, vt<ll>(2, 0));
+    for(int i = 0; i < K; ++i) {
+        auto [pos, delta] = grass[i];
+        auto it = lower_bound(all(bad_pos), pos);
+        int mnIdx1 = -1, mnIdx2 = -1;
+        if(it != bad_pos.end()) {
+            mnIdx1 = it - bad_pos.begin();
+        }
+        if(it != bad_pos.begin()) {
+            --it;
+            mnIdx2 = it - bad_pos.begin();
+        }
+        ll d1 = ~mnIdx1 ? abs(bad_pos[mnIdx1] - pos) : 2e18;
+        ll d2 = ~mnIdx2 ? abs(bad_pos[mnIdx2] - pos) : 2e18;
+        assert(d1 < ll(2e18) or d2 < ll(2e18));
+        if(d1 < d2) {
+            if(bad_pos[mnIdx1] < pos) {
+                contribution[mnIdx1][1] += delta;
             }
             else {
-                v[id2][0] += val;
+                contribution[mnIdx1][0] += delta;
+            }
+        }
+        else {
+            if(bad_pos[mnIdx2] < pos) {
+                contribution[mnIdx2][1] += delta;
+            }
+            else {
+                contribution[mnIdx2][0] += delta;
             }
         }
     }
-    ll ans = 0;
-    vt<ll> pos;
-    for(int i = 0; i < m; ++i) {
-        for(int j = 0; j < 2; ++j) {
-            pos.pb(v[i][j]);
-        }
+    dbg(contribution);
+    vt<ll> p;
+    for(int i = 0; i < M; ++i) {
+        p.push_back(contribution[i][0]);
+        p.push_back(contribution[i][1]);
     }
-    sort(rall(pos));
-    for(int i = 0; i < n; ++i) {
-        ans += pos[i];
+    sort(rall(p));
+    ll ans = 0;
+    for(int i = 0; i < N; ++i) {
+        ans += p[i];
     }
     print(ans);
 }
-/* REMEMBER
- *      int overflow, array bounds
- *      special cases (n=1? n=0?)
- */
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    int T = 1;
-    /* read(T); */
-    for(int tc = 1; tc <= T; ++tc) {
-        /* write("Case #", tc, ": "); */
-        solve();
+    int t = 1;
+    // read(t);
+    for(int tc = 1; tc <= t; ++tc) {
+        run_case();
     }
 }
+
